@@ -25,9 +25,15 @@ def handle_hello():
 
 @api.route("/people/population", methods=["GET"])
 def people_population():
-    url_people = "https://www.swapi.tech/api/people?page=2&limit=20"
+    url_people = "https://www.swapi.tech/api/people?page=1&limit=10"
 
     response = requests.get(url_people)
-    print(response)
+    data = response.json()
+
+    for person in data["results"]:
+        person_details = requests.get(person["url"])
+        person_details = person_details.json()
+
+        print(person_details["result"]["uid"])
 
     return "trabajando por usted", 200

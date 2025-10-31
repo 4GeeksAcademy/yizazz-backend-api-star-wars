@@ -22,6 +22,9 @@ class User(db.Model):
 
 class People(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
+    eye_color: Mapped[str] = mapped_column(String(120), nullable=False)
+    hair_color: Mapped[str] = mapped_column(String(120))
     
 
     def serialize(self):

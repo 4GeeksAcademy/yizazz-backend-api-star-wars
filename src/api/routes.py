@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+import requests
 
 api = Blueprint('api', __name__)
 
@@ -20,3 +21,13 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+
+@api.route("/people/population", methods=["GET"])
+def people_population():
+    url_people = "https://www.swapi.tech/api/people?page=2&limit=20"
+
+    response = requests.get(url_people)
+    print(response)
+
+    return "trabajando por usted", 200
